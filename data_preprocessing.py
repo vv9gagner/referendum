@@ -3,11 +3,11 @@ import pandas as pd
 import numpy as np
 
 
-FILE_REFERENDUM             = "/home/wgong/Documents/exercise_saint_gobain/Referendum.csv"
-FILE_POPULATION_2013_METRO  = '/home/wgong/Documents/exercise_saint_gobain/base-cc-evol-struct-pop-2013.xls'
-FILE_POPULATION_2013_COM    = '/home/wgong/Documents/exercise_saint_gobain/base-cc-evol-struct-pop-2013-com.xls'
-FILE_DIPLOME                = "/home/wgong/Documents/exercise_saint_gobain/pop-16ans-dipl6818.xls"
-FILE_REVENU_PAUVRETE        = "/home/wgong/Documents/exercise_saint_gobain/filo-revenu-pauvrete-menage-2013.xls"
+FILE_REFERENDUM             = "./Referendum.csv"
+FILE_POPULATION_2013_METRO  = './base-cc-evol-struct-pop-2013.xls'
+FILE_POPULATION_2013_COM    = './base-cc-evol-struct-pop-2013-com.xls'
+FILE_DIPLOME                = "./pop-16ans-dipl6818.xls"
+FILE_REVENU_PAUVRETE        = "./filo-revenu-pauvrete-menage-2013.xls"
 
 ####################################################################################
 refe = pd.read_csv(FILE_REFERENDUM, sep=';')
