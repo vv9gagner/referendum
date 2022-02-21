@@ -22,6 +22,7 @@ refe.loc[refe["Code du département"] == 'ZN' , 'Code du département'] = '98'
 refe.loc[refe["Code du département"] == 'ZP' , 'Code du département'] = '987'
 refe.loc[refe["Code du département"] == 'ZW' , 'Code du département'] = '986'
 refe.loc[refe["Code du département"] == 'ZZ' , 'Code du département'] = '99'
+
 refe["Code du département"] = refe["Code du département"].astype('str')
 refe["Code de la commune"] = refe["Code de la commune"].astype('str')
 
@@ -99,7 +100,7 @@ diplome.loc[:, "dpx_rec0s1age2_rec1rpop2018":"dpx_rec6s2age2_rec2rpop2018"] = di
 # création de codgeo
 diplome["CODGEO"] = diplome['dr'] + diplome['cr']
 
-# creater les categories de diplomes
+# creer les categories de diplomes
 l_niveau_diplome =np.array(diplome.keys()[6:-1]).reshape(7,4)
 
 for level in np.arange(l_niveau_diplome.shape[0]):
@@ -125,7 +126,7 @@ revenu_pauvrete_brut = pd.read_excel(FILE_REVENU_PAUVRETE,
 
 revenu_pauvrete = revenu_pauvrete_brut.iloc[:,0:5].dropna(how = 'any')
 
-# ajouter diplomes information à data_brut
+# ajouter revenus information à data_brut
 data_brut = pd.merge(data_brut, revenu_pauvrete, 
                       how = 'outer', 
                       on='CODGEO')
@@ -135,8 +136,8 @@ data['voting_result'] = data_brut.apply(lambda x : 0 if (x["Choix A"] > x["Choix
 
 data['POP_FEMME_HOMME_19PLUS'] =  data["P13_H2064"] \
                                 + data["P13_H65P"]  \
-                                        + data["P13_F2064"]  \
-                                            + data["P13_F65P"]
+                                + data["P13_F2064"]  \
+                                + data["P13_F65P"]
 
                                            
 data['Percentage_POP_FEMME_HOMME_19PLUS_VS_POP_TOTAL'] = data['POP_FEMME_HOMME_19PLUS'] / data['P13_POP']
@@ -147,13 +148,13 @@ for i in np.arange(8) + 1:
 for i in np.arange(7):
     data['Percentage_DIP_FEMME_HOMME_16PLUS_N'+ str(i) +'_VS_POP_TOTAL'] =  data['dip_' + str(i)] / data['P13_POP']
 
-data['Percentage_INSCRITE_VS_POP_TOTAL']    = data['Inscrits'] / data['P13_POP']
+data['Percentage_INSCRITE_VS_POP_TOTAL']    =  data['Inscrits'] / data['P13_POP']
 data['Percentage_ABSTENTION_VS_POP_TOTAL']  =  data['Abstentions'] / data['P13_POP']
 data['Percentage_BlANC_NUL_VS_POP_TOTAL']   =  data['Blancs et nuls'] / data['P13_POP']
 data['Percentage_CHOIX_A_VS_POP_TOTAL']     =  data['Choix A'] / data['P13_POP']
 data['Percentage_CHOIX_B_VS_POP_TOTAL']     =  data['Choix B'] / data['P13_POP']
 
-# On a remarqué que certaines des proportion sont supérieur à 1, ce qui n'est pas normal. 
+# On a remarqué que certaines proportions sont supérieur à 1, ce qui n'est pas normal. 
 # Par précaution, on les a enlevé pour la suite d'analyse.
 
 for i in data.iloc[:,43:63].columns:
